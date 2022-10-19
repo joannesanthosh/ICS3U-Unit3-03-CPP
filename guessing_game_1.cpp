@@ -5,33 +5,28 @@
 // This is the guessing game program
 
 #include <iostream>
+#include <random>
 
 int main() {
-    // this function checks if guess is correct or incorrect
-    // URL: https://www.algolist.net/Cpp/Guess_game
-    srand(time(0));
     int randomNumber;
-    randomNumber = rand(0, 9);
     int userGuess;
 
-    // input
-    std::cout << "Enter a number between 0-9: ";
+    std::random_device rseed;
+    std::mt19937 rgen(rseed());
+    std::uniform_int_distribution<int> idist(0, 9);
+    randomNumber = idist(rgen);
+
+    // Input
+    std::cout << "Enter the number between 0-9: ";
     std::cin >> userGuess;
-    std::cout << "" << std::endl;
+    std::cout << std::endl;
 
-    // process
-    if (userGuess != randomNumber) {
-        // output
-        std::cout << "Incorrect. The answer is ";
-    }
-
+    // Process and Output
     if (userGuess == randomNumber) {
-        // output
-        std::cout << "Correct!";
+        std::cout << "Correct!" << std::endl;
+    } else {
+        std::cout << "Incorrect, the number was " << ""
+         << randomNumber << "" << std::endl;
     }
-
-    std::cout << "\nDone." << std::endl;
-    system("PAUSE");
-
-    return 0;
+    std::cout << "\nDone.";
 }
